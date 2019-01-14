@@ -3,10 +3,12 @@
 #include <stdint.h>
 main()
 {
-	uint32_t num32 = 0xdeadbeef;
+	uint32_t num32;// = 0xdeadbeef;
 	uint8_t input[4];
 	int a=0;
 	uint8_t *ptinput;
+	printf("Input int 32 : ");
+	scanf("%x", &num32);
 	printf("Input :  0x%x\n", num32);
 	for(int i = 24; i >= 0; i--)
 	{
@@ -29,7 +31,6 @@ main()
 	}
 	
 
-	
 /*	
 	uint8_t a = num32 >> 0;  // 0xef
 	uint8_t b = num32 >> 8;  // 0xbe
