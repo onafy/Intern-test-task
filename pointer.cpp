@@ -1,15 +1,29 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdint.h>
+
+uint8_t getPointer(uint32_t num32);
+typedef uint8_t (*func)(uint32_t);
+
 main()
 {
-	uint32_t num32;// = 0xdeadbeef;
-	uint8_t input[4];
-	int a=0;
-	uint8_t *ptinput;
+	uint32_t num32;
 	printf("Input int 32 : ");
 	scanf("%x", &num32);
 	printf("Input :  0x%x\n", num32);
+	
+	func gp = getPointer;
+	gp(num32);
+
+	getch();
+}
+
+
+uint8_t getPointer(uint32_t num32)
+{
+	uint8_t input[4];
+	int a=0;
+	uint8_t *ptinput;
 	for(int i = 24; i >= 0; i--)
 	{
 		if(i%8==0)
@@ -29,18 +43,4 @@ main()
 	 	printf("alamat = %x\n\n", ptinput);
 	 	ptinput++;
 	}
-	
-
-/*	
-	uint8_t a = num32 >> 0;  // 0xef
-	uint8_t b = num32 >> 8;  // 0xbe
-	uint8_t c = num32 >> 16; // 0xad 
-	uint8_t d = num32 >> 24; // 0xde 
-	printf("ini char 0x%x\n", d);
-	printf("ini char 0x%x\n", c);
-	printf("ini char 0x%x\n", b);
-	printf("ini char 0x%x\n", a); */
-	
-
-	getch();
 }
