@@ -8,6 +8,7 @@ Karena yang akan diambil contoh adfalah arduino Uno, maka opsi yang digunakan ad
 - Method ini adalah method yang harus diinisialisasi sebelum menggunakan method yang lain
 - pada method initialize ini, metho setPeriod akan dipanggil dengan parameter yang sama dengan parameter dari method initialize ini sendiri dan Timer control register (TCCRA) yang mengatur hubungan Compare Outpun (OCR) dan Timer1 di set menjadi 0 
 
+
 ## 2. void setPeriod(microseconds)
 - parameter microseconds adalah periode yang diset pada method initialize()
 - berdasarkan http://playground.arduino.cc/Code/Timer1 , minimum periode yang bisa diset adalah 1 microseconds dan maksimum 8388480 microseconds atau 8,3 seconds
@@ -28,3 +29,16 @@ sehingga untuk perintah clockSelectBits = _BV(CS11) nmaksudnya pin CS11 akan dip
 ![tccr1b](https://user-images.githubusercontent.com/42448473/51250024-29ff4d00-19d0-11e9-9e80-35e1df7924ad.png)
 
 
+## 3. void pwm(pin, duty) atau void pwm(pin, duty, microseconds)
+- method pwm terdiri dari dua jenis dimana kita bisa memilih apakah akan menyertakan periode Timer atau tidak. Perbedaannya hanyalah : ketika kita menyertakan periode timer, maka method setPeriod akan disertakan dengan paramaternya adalah periode Timer yang sama dengan parameter method ini, kemudian akan dipanggil kembali method pwm dengan dua parameter yaitu pin dan duty
+- method ini bertujuan untuk menghasilkan gelombang pwm pada pin tertentu sesuai pin pada parameter yang diset. Pin yang diset akan menentukan bit mana yang akan diset pada register TCCR1A untuk menjadi 1 (apakah COM1A1/COM1B1/COM1C1). Gunanya adalah untuk mengontrol bagaimana Compare Output Pin terhubung dengan Timer1 / mengaktifkan pin output
+- parameter duty berupa bilangan int 10 bit yaitu dari 0-1023, dimana 0  (0% duty) dan 1023 (100% duty)
+
+
+## 4. void setPwmDuty(pin, duty)
+- di method ini nilai pwmPeriod akan disimpan sebagai dutycycle, kemudian nilai dutycycle akan dikalikan dengan nilai parameter duty (hasilnya kembali akan disimpan dalam variabel dutycycle), lalu nilai dutycycle akan dishift kanan sebanyak 10 kali.
+- Jika pin yang diset adalah pin A Timer1, maka nilai OCR1A akan sama dengan nilai dutyCycle, begitu pula dengan jika pin B maka register OCR1B nilainya akan sama dengan dutycycle
+
+
+## 5. disablePwm(pin)
+- pin output akan dinonaktifkan/ set 0 dengan perintah ~_BV(COM1...1) dimana register TCCR juga akan di 0 kan
