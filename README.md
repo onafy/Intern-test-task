@@ -19,10 +19,15 @@ Karena yang akan diambil contoh adfalah arduino Uno, maka opsi yang digunakan ad
 - clockSelectBits = _BV(CS11);
 dalam memprogram microcontroller, biasanya ada bit-bit tertentu perlu diset (1) atau diclear (0) pada register IO tertentu. Misal untuk membuat port 5 bernilai 1/high, untuk melakukan itu register akan di OR kan dengan nilai 1 (0000 0001) kemudian dishift 5 kali
 ke kiri sehingga menjadi 0010 0000. 
+
                             namaregister |= ( 1<<5)
-Sehingga ini akan memaksa bit ke-5 dari register tersebut menjadi bernilai 1. Nah perintah ini dapat digunakan melalui makro _BV(bit yang diinginkan) dimana BV adalah kepanjangan dari bit value. sehingga pernyataannya menjadi
-                            namaregister |= _BV(5)
-sehingga untuk perintah clockSelectBits = _BV(CS11) nmaksudnya pin CS11 akan dipaksa bernilai , hasilnya akan disimpan pada clockSelectBits
+
+Sehingga ini akan memaksa bit ke-5 dari register tersebut menjadi bernilai 1. Nah perintah ini dapat digunakan melalui makro _BV(bit    yang diinginkan) dimana BV adalah kepanjangan dari bit value. sehingga pernyataannya menjadi
+
+                             namaregister |= _BV(5)
+                             
+sehingga untuk perintah `lockSelectBits = _BV(CS11)` maksudnya pin CS11 akan dipaksa bernilai 1, hasilnya akan disimpan pada             clockSelectBits
+
 - sedangkan pwmperiod merupakan hasil kali bilangan tertentu(tergantung memenuhi cabang yang mana) dengan cycles yang diperoleh
 - diakhir percabangan, Input Compare Register (ICR) yang mengukur waktu antara pulsa-pulsa pada pin-pin ICP akan diset nilainya sesuaqi pwmperiod yang didapat
 - kemudian register Timer/Counter Control Register tipe B (TRCCR1B) akan menyimpan bit dari clockSelectBits dan _BV(WGM13) (yang dishift / diset 1). Berdasarkan clock clock yang terbentuk dari clock-clock yang terbentuk dari CS10, CS11 dan CS12 yang tersimpan di clockSelectBits itu akan menentukan control apa yang akan dilakukan. seperti  pada gambar
