@@ -1,4 +1,4 @@
-E-Fishery Intern Test
+eFishery Intern Test
 
 Di library Timer1 ini disediakan dua opsi hardware yaitu berbasis chip  AVR_ATtiny85 dengan ukuran Timer1nya 8 bit
 , chip AVR yang Timer1nyas 16 bit dan chip lain yang non-AVR dengan Timer1 juga 16 bit
